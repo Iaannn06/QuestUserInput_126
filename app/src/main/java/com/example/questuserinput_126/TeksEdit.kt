@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 
-?
+
 
 @Composable
 fun FormDataDiri(modifier: Modifier
@@ -38,11 +38,9 @@ fun FormDataDiri(modifier: Modifier
     var textNama by remember { mutableStateOf(value = "") }
     var textAlamat by remember { mutableStateOf(value = "") }
     var textJK by remember { mutableStateOf(value = "") }
-
     var nama by remember { mutableStateOf(value = "") }
     var alamat by remember { mutableStateOf(value = "") }
     var jenis by remember { mutableStateOf(value = "") }
-
     val gender: List<String> = listOf("laki-laki", "perempuan")
 
     Column(
@@ -76,6 +74,15 @@ fun FormDataDiri(modifier: Modifier
                 }
             }
         }
+
+        OutlinedTextField(
+            value = textAlamat,
+            singleLine = true,
+            modifier = Modifier.width(250.dp),
+            label = { Text("Alamat Lengkap") },
+            onValueChange = { textAlamat = it }
+        )
+
         HorizontalDivider(
             modifier = Modifier.padding(
                 bottom = dimensionResource(id =R.dimen.padding_medium),
