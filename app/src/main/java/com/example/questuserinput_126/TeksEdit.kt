@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 
 ?
 
@@ -89,8 +90,7 @@ fun FormDataDiri(modifier: Modifier
                 jenis=textJK
                 alamat=textAlamat
             }
-        ){
-
+        ){Text(text= stringResource(id = R.string.submit))
         }
 
 
