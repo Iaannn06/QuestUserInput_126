@@ -34,7 +34,7 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        // Header gradien ungu
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -56,7 +56,7 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Card putih untuk isi form
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -166,7 +166,7 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Tombol Submit Ungu Membulat
+
         Button(
             onClick = { /* aksi submit */ },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8E24AA)),
