@@ -1,139 +1,185 @@
 package com.example.questuserinput_126
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.runtime.mutableStateOf
-import android.R.string
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.Button
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.FloatingActionButtonDefaults.elevation
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
-import androidx.compose.runtime.remember
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.unit.dp
-import androidx.compose.material3.Text
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
-
-
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun FormDataDiri(modifier: Modifier
-) {
-    var textNama by remember { mutableStateOf(value = "") }
-    var textAlamat by remember { mutableStateOf(value = "") }
-    var textJK by remember { mutableStateOf(value = "") }
-    var nama by remember { mutableStateOf(value = "") }
-    var alamat by remember { mutableStateOf(value = "") }
-    var jenis by remember { mutableStateOf(value = "") }
-    val gender: List<String> = listOf("laki-laki", "perempuan")
+fun FormDataDiri(modifier: Modifier = Modifier) {
+    var namaLengkap by remember { mutableStateOf("") }
+    var alamat by remember { mutableStateOf("") }
+    var jenisKelamin by remember { mutableStateOf("") }
+    var status by remember { mutableStateOf("") }
+
+    val listJK = listOf("Laki-laki", "Perempuan")
+    val listStatus = listOf("Janda", "Lajang", "Duda")
 
     Column(
-        modifier = Modifier.padding(top = 50.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xFFF6F4F8))
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
     ) {
-        OutlinedTextField(
-            value = textNama,
-            singleLine = true,
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.width(width = 250.dp),
-            label = { Text(text = "Nama Lengkap") },
-            onValueChange = {
-                textNama = it
-            }
-        )
-        Row {
-            gender.forEach { item ->
-                Row(
-                    modifier = Modifier.selectable(
-                        selected = textJK == item,
-                        onClick = { textJK = item }
-                    ), verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(
-                        selected = textJK == item,
-                        onClick = {
-                            textJK = item
-                        })
-                    Text(text = item)
-                }
-            }
+
+        // Header gradien ungu
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(70.dp)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(Color(0xFFAB47BC), Color(0xFF8E24AA))
+                    )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Formulir Pendaftaran",
+                fontSize = 20.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
         }
 
-        OutlinedTextField(
-            value = textAlamat,
-            singleLine = true,
-            modifier = Modifier.width(250.dp),
-            label = { Text("Alamat Lengkap") },
-            onValueChange = { textAlamat = it }
-        )
+        Spacer(modifier = Modifier.height(24.dp))
 
-        HorizontalDivider(
-            modifier = Modifier.padding(
-                bottom = dimensionResource(id =R.dimen.padding_medium),
-                top = dimensionResource (
-                id = R.dimen.padding_medium
-            )),
-            thickness = dimensionResource(id = R.dimen.divider_tipis),
-            color = Color.DarkGray
-        )
-
-        Button(
-            modifier = Modifier.fillMaxWidth(fraction = 1f),
-            enabled = textAlamat.isNotEmpty(),
-            onClick = {
-                nama=textNama
-                jenis=textJK
-                alamat=textAlamat
-            }
-        ){Text(text= stringResource(id = R.string.submit))
-        }
-
-        HorizontalDivider(
+        // Card putih untuk isi form
+        Card(
             modifier = Modifier
-                .padding(bottom = dimensionResource(id=R.dimen.padding_medium),
-                    top = dimensionResource(
-                        id= R.dimen.padding_medium
-
-                )),
-            thickness =dimensionResource(id=R.dimen.divider_tipis),
-            color = Color.DarkGray
-        )
-
-        ElevatedCard (
-            elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.Black),
-            modifier = Modifier
-                .height(height = 100.dp)
-                .width(width = 300.dp)
-        ){
-            Column (
+                .fillMaxWidth()
+                .shadow(4.dp, shape = RoundedCornerShape(12.dp)),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
+        ) {
+            Column(
                 modifier = Modifier
-                    .padding(horizontal = 5.dp, vertical = 15.dp),)
-            {
-                Text(text = "Nama : "+nama, color = Color.White)
-                Text(text = "Gender: "+jenis, color = Color.White)
-                Text(text = "Alamat :"+alamat, color = Color.White)
+                    .padding(20.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
+            ) {
+                // Nama Lengkap
+                Text(
+                    text = "NAMA LENGKAP",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+
+                OutlinedTextField(
+                    value = namaLengkap,
+                    onValueChange = { namaLengkap = it },
+                    placeholder = { Text("Isian nama lengkap") },
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                )
+
+                // Jenis Kelamin
+                Text(
+                    text = "JENIS KELAMIN",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+
+                listJK.forEach { item ->
+                    Row(
+                        modifier = Modifier
+                            .selectable(
+                                selected = jenisKelamin == item,
+                                onClick = { jenisKelamin = item }
+                            )
+                            .padding(vertical = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = jenisKelamin == item,
+                            onClick = { jenisKelamin = item }
+                        )
+                        Text(text = item)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Status Perkawinan
+                Text(
+                    text = "STATUS PERKAWINAN",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+
+                listStatus.forEach { item ->
+                    Row(
+                        modifier = Modifier
+                            .selectable(
+                                selected = status == item,
+                                onClick = { status = item }
+                            )
+                            .padding(vertical = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = status == item,
+                            onClick = { status = item }
+                        )
+                        Text(text = item)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Alamat
+                Text(
+                    text = "ALAMAT",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+
+                OutlinedTextField(
+                    value = alamat,
+                    onValueChange = { alamat = it },
+                    placeholder = { Text("Alamat") },
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp)
+                )
             }
         }
 
+        Spacer(modifier = Modifier.height(20.dp))
 
+        // Tombol Submit Ungu Membulat
+        Button(
+            onClick = { /* aksi submit */ },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8E24AA)),
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+        ) {
+            Text(
+                text = "Submit",
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
-
-
 }
